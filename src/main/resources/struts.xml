@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" extends="struts-default">
+
+        <action name="orders" class="actions.OrderAction">
+            <interceptor-ref name="store">
+                <param name="operationMode">AUTOMATIC</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+
+            <result name="success">/orders.jsp</result>
+            <result name="input">/error.jsp</result>
+        </action>
+
+        <action name="order/new">
+            <result>/orderForm.jsp</result>
+        </action>
+
+        <action name="/order/{id}/edit" class="actions.OrderAction" method="edit">
+            <interceptor-ref name="store">
+                <param name="operationMode">AUTOMATIC</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+
+            <result name="success">/orderForm.jsp</result>
+            <result name="input" type="redirect">orders</result>
+        </action>
+
+        <action name="/order/{id}/del" class="actions.OrderAction" method="del">
+            <interceptor-ref name="store">
+                <param name="operationMode">AUTOMATIC</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+
+            <result name="success" type="redirect">orders</result>
+            <result name="input" type="redirect">orders</result>
+        </action>
+
+        <action name="order/save" class="actions.OrderAction" method="save">
+            <interceptor-ref name="store">
+                <param name="operationMode">AUTOMATIC</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+
+            <result name="success" type="redirectAction">orders</result>
+            <result name="input">/orderForm.jsp</result>
+        </action>
+
+        <action name="/order/{id}/find" class="actions.OrderAction" method="findById">
+            <result name="success" type="redirectAction">orders</result>
+            <result name="input">/orderForm.jsp</result>
+        </action>
+
+    </package>
+</struts>
