@@ -21,9 +21,9 @@
     </head>
 
     <body>
-        <s:url id="saveurl" value="/order/save" />
-        <s:form method="post" action="%{saveurl}">
+        <s:form method="post" action="update">
             <table>
+                <s:hidden name="orderBill.id"/>
                 <s:textfield name="orderBill.clientName" label="Client" />
                 <s:textfield name="orderBill.amount" label="Amount" />
                 <tr>

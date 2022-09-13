@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Struts2-hibernate" />
+        <module name="struts2-hibernate" />
       </profile>
     </annotationProcessing>
   </component>

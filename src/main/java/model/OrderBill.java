@@ -3,28 +3,29 @@ package model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "order_bill")
+public class OrderBill implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    String id;
+    Integer id;
 
     @Column(name = "client_name")
-    String name;
+    String clientName;
 
     @Column(name = "amount")
     Long amount;
 
-    public Order() {
+    public OrderBill() {
     }
 
-    public Order(String id, String name, Long amount) {
+    public OrderBill(Integer id, String clientName, Long amount) {
         this.id = id;
-        this.name = name;
+        this.clientName = clientName;
         this.amount = amount;
     }
 }

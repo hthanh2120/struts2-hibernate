@@ -6,15 +6,13 @@
 
 <struts>
     <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.patternMatcher" value="regex" />
 
     <package name="default" extends="struts-default">
 
         <action name="orders" class="actions.OrderAction">
-            <interceptor-ref name="store">
-                <param name="operationMode">AUTOMATIC</param>
-            </interceptor-ref>
-            <interceptor-ref name="defaultStack" />
-
             <result name="success">/orders.jsp</result>
             <result name="input">/error.jsp</result>
         </action>
@@ -23,39 +21,28 @@
             <result>/orderForm.jsp</result>
         </action>
 
-        <action name="/order/{id}/edit" class="actions.OrderAction" method="edit">
-            <interceptor-ref name="store">
-                <param name="operationMode">AUTOMATIC</param>
-            </interceptor-ref>
-            <interceptor-ref name="defaultStack" />
+        <action name="/order/{id}/edit" class="actions.OrderAction" method="updateView">
+            <result name="success">/updateForm.jsp</result>
+        </action>
 
-            <result name="success">/orderForm.jsp</result>
+        <action name="update" class="actions.OrderAction" method="edit">
+            <result name="success">/orders.jsp</result>
             <result name="input" type="redirect">orders</result>
         </action>
 
         <action name="/order/{id}/del" class="actions.OrderAction" method="del">
-            <interceptor-ref name="store">
-                <param name="operationMode">AUTOMATIC</param>
-            </interceptor-ref>
-            <interceptor-ref name="defaultStack" />
-
             <result name="success" type="redirect">orders</result>
             <result name="input" type="redirect">orders</result>
         </action>
 
         <action name="order/save" class="actions.OrderAction" method="save">
-            <interceptor-ref name="store">
-                <param name="operationMode">AUTOMATIC</param>
-            </interceptor-ref>
-            <interceptor-ref name="defaultStack" />
-
             <result name="success" type="redirectAction">orders</result>
             <result name="input">/orderForm.jsp</result>
         </action>
 
-        <action name="/order/{id}/find" class="actions.OrderAction" method="findById">
-            <result name="success" type="redirectAction">orders</result>
-            <result name="input">/orderForm.jsp</result>
+        <action name="search" class="actions.OrderAction" method="search">
+            <result name="success">orders.jsp</result>
+            <result name="input">/orders.jsp</result>
         </action>
 
     </package>
